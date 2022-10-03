@@ -7,7 +7,7 @@ import { TodoSearch } from "./TodoSearch";
 // import './App.css';
 // lista falsa de TODOs
 const todos = [
-  { text: "cortar cebolla", completed: false },
+  { text: "cortar cebolla", completed: true },
   { text: "tomar el curso", completed: false },
   { text: "hcaer ejercicios", completed: false },
 ];
