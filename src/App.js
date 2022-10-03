@@ -1,4 +1,5 @@
 import React from "react";
+import { CreateTodoButton } from "./CreateTodoButton";
 import { TodoCounter } from "./TodoCounter";
 import { TodoItem } from "./TodoItem";
 import { TodoList } from "./TodoList";
@@ -24,9 +25,8 @@ function App() {
           <TodoItem />
         ))}
       </TodoList>
+      <CreateTodoButton />
       {/* boton que abre el modal para crear nuevos TODO */}
-      {/* <CreateTodoButton /> */}
-      <button>+</button>
     </React.Fragment>
   );
 }
