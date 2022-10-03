@@ -23,7 +23,11 @@ function App() {
         {/* iteramos los elementos del array TODOS */}
         {todos.map((todo) => (
           // pasamos un identificador "KEY" unico por cada elemento
-          <TodoItem key={todo.text} text={todo.text} />
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+          />
         ))}
       </TodoList>
       <CreateTodoButton />
