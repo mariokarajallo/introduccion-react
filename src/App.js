@@ -1,5 +1,6 @@
 import React from "react";
 import { TodoCounter } from "./TodoCounter";
+import { TodoSearch } from "./TodoSearch";
 // import './App.css';
 // lista falsa de TODOs
 const todos = [
@@ -11,11 +12,8 @@ function App() {
   return (
     // todo lo que vamos a mostrar en nuestra aplicacion
     <React.Fragment>
-      {/* // cuantos TODOs completados y creados */}
-      <TodoCounter />
-
-      {/* <TodoSearch /> */}
-      <input placeholder="Cebolla"></input>
+      <TodoCounter /> {/* // cuantos TODOs completados y creados */}
+      <TodoSearch />
       {/* // contenedor de TODOs */}
       {/* <TodoList> */}
       {/* enviar cada uno de los todo que necesitamos */}
