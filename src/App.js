@@ -17,12 +17,13 @@ function App() {
     <React.Fragment>
       <TodoCounter /> {/* // cuantos TODOs completados y creados */}
       <TodoSearch />
+      {/* // contenedor de TODOs */}
       <TodoList>
-        {/* // contenedor de TODOs */}
-        {/* enviar cada uno de los todo que necesitamos */}
-        {/* iteramos los elementos del array todos */}
+        {/* enviar cada uno de los TODO que necesitamos */}
+        {/* iteramos los elementos del array TODOS */}
         {todos.map((todo) => (
-          <TodoItem />
+          // pasamos un identificador "KEY" unico por cada elemento
+          <TodoItem key={todo.text} text={todo.text} />
         ))}
       </TodoList>
       <CreateTodoButton />
