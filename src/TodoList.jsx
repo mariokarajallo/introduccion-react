@@ -1,7 +1,7 @@
-import React, { Children } from "react";
+import React from "react";
 
 function TodoList(props) {
-  return <section>{props.Children}</section>;
+  return <section>{props.children}</section>;
 }
 
 export { TodoList };

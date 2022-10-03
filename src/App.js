@@ -1,5 +1,7 @@
 import React from "react";
 import { TodoCounter } from "./TodoCounter";
+import { TodoItem } from "./TodoItem";
+import { TodoList } from "./TodoList";
 import { TodoSearch } from "./TodoSearch";
 // import './App.css';
 // lista falsa de TODOs
@@ -14,14 +16,14 @@ function App() {
     <React.Fragment>
       <TodoCounter /> {/* // cuantos TODOs completados y creados */}
       <TodoSearch />
-      {/* // contenedor de TODOs */}
-      {/* <TodoList> */}
-      {/* enviar cada uno de los todo que necesitamos */}
-      {/* iteramos los elementos del array todos */}
-      {/* {todos.map((todo) => ( */}
-      {/* <TodoItem /> */}
-      {/* ))} */}
-      {/* </TodoList> */}
+      <TodoList>
+        {/* // contenedor de TODOs */}
+        {/* enviar cada uno de los todo que necesitamos */}
+        {/* iteramos los elementos del array todos */}
+        {todos.map((todo) => (
+          <TodoItem />
+        ))}
+      </TodoList>
       {/* boton que abre el modal para crear nuevos TODO */}
       {/* <CreateTodoButton /> */}
       <button>+</button>
