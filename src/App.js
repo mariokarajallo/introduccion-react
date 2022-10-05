@@ -13,6 +13,9 @@ const defaultTodos = [
   { text: "hcaer ejercicios", completed: true },
 ];
 function App() {
+  //estado de nuesta busqueda
+  const [searchValue, setSearchValue] = React.useState("");
+
   //estado inicial de nuestros TODOS
   const [todos, setTodos] = React.useState(defaultTodos);
   //cantidad de TODOs completados
@@ -20,17 +23,37 @@ function App() {
   // cantidad total de TODOs
   const totalTodos = todos.length;
 
+  //creamos una variable donde guardarmeos las coincidencias con la busqueda
+  let searchedTodos = [];
+
+  //logica para filtrar
+  if (!searchValue.length >= 1) {
+    // guardamos nuestros todos a la variable coincidencias
+    searchedTodos = todos;
+  } else {
+    //filtramos
+    searchedTodos = todos.filter((todo) => {
+      //pasamos todos los elementos del array TODO a minuscula
+      const todoText = todo.text.toLocaleLowerCase();
+      //pasamos todos los palabras cargardas en el input a minuscula
+      const searchText = searchValue.toLocaleLowerCase();
+
+      //devolvemos los elementos que coincidan
+      return todoText.includes(searchText);
+    });
+  }
+
   return (
     // todo lo que vamos a mostrar en nuestra aplicacion
     <React.Fragment>
       {/* Pasamos el estado a nuestro componente: cuantos TODOs completados y creados */}
       <TodoCounter total={totalTodos} completed={completedTodos} />
-      <TodoSearch />
+      <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       {/* // contenedor de TODOs */}
       <TodoList>
         {/* enviar cada uno de los TODO que necesitamos */}
-        {/* iteramos los elementos del array TODOS */}
-        {todos.map((todo) => (
+        {/* iteramos los elementos del array searchedTodos que coinciden con nuestra busqueda */}
+        {searchedTodos.map((todo) => (
           // pasamos un identificador "KEY" unico por cada elemento
           <TodoItem
             key={todo.text}
