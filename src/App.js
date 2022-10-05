@@ -57,6 +57,21 @@ function App() {
     setTodos(newTodos);
   };
 
+  //eliminar todo
+  // recibe un texto
+  const deleteTodo = (text) => {
+    //filtramos si el texto que recibimos es igual a el texto de un elemento del array TODO
+    // para obtener el valor de la posicion del elemento
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+    //creamos un nuevo array copiando el array de todos
+    const newTodos = [...todos];
+    //a nuestro nuevo array, eliminamos los elementos que coinciden con el texto recibido
+    //.splice(donde inicia el corte, cuantos elementos desde el inicio del corte)
+    newTodos.splice(todoIndex, 1);
+    //actualizamos nuestro estado mandando el nuevo array de todos
+    setTodos(newTodos);
+  };
+
   return (
     // todo lo que vamos a mostrar en nuestra aplicacion
     <React.Fragment>
@@ -74,6 +89,7 @@ function App() {
             text={todo.text}
             completed={todo.completed}
             onComplete={() => completeTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
           />
         ))}
       </TodoList>
