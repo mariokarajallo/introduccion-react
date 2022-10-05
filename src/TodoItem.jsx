@@ -1,10 +1,6 @@
 import React from "react";
 import "./TodoItem.css";
 function TodoItem(props) {
-  const onComplete = () => {
-    alert("Ya completaste el TODO " + props.text);
-  };
-
   const onDelete = () => {
     alert("Ya eliminaste el TODO " + props.text);
   };
@@ -13,7 +9,7 @@ function TodoItem(props) {
     <li className="TodoItem">
       <span
         className={`Icon Icon-check ${props.completed && "Icon-check--active"}`}
-        onClick={onComplete}
+        onClick={props.onComplete}
       >
         ✔
       </span>

@@ -9,8 +9,9 @@ import { TodoSearch } from "./TodoSearch";
 // lista falsa de TODOs
 const defaultTodos = [
   { text: "cortar cebolla", completed: true },
-  { text: "tomar el curso", completed: true },
-  { text: "hcaer ejercicios", completed: true },
+  { text: "tomar el curso", completed: false },
+  { text: "hacer ejercicios", completed: false },
+  { text: "hacer tesis", completed: true },
 ];
 function App() {
   //estado de nuesta busqueda
@@ -43,6 +44,19 @@ function App() {
     });
   }
 
+  //completar todo
+  const completeTodo = (text) => {
+    //filtramos si el texto que recibimos es igual a el texto de un elemento del array
+    // para obtener el valor de la posicion del elemento
+    const todoIndex = todos.findIndex((todo) => todo.text === text);
+    //creamos un nuevo array copiando el array de todos
+    const newTodos = [...todos];
+    //a nuestro nuevo array a todos los elementos que cumplan con el mismo texto que recibamos, le cambiamos a true el valor de la propiedad completed
+    newTodos[todoIndex].completed = true;
+    //actualizamos nuestro estado mandando el nuevo array de todos
+    setTodos(newTodos);
+  };
+
   return (
     // todo lo que vamos a mostrar en nuestra aplicacion
     <React.Fragment>
@@ -59,6 +73,7 @@ function App() {
             key={todo.text}
             text={todo.text}
             completed={todo.completed}
+            onComplete={() => completeTodo(todo.text)}
           />
         ))}
       </TodoList>
