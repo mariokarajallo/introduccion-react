@@ -5,17 +5,26 @@ import { TodoItem } from "./TodoItem";
 import { TodoList } from "./TodoList";
 import { TodoSearch } from "./TodoSearch";
 // import './App.css';
+
 // lista falsa de TODOs
-const todos = [
+const defaultTodos = [
   { text: "cortar cebolla", completed: true },
-  { text: "tomar el curso", completed: false },
-  { text: "hcaer ejercicios", completed: false },
+  { text: "tomar el curso", completed: true },
+  { text: "hcaer ejercicios", completed: true },
 ];
 function App() {
+  //estado inicial de nuestros TODOS
+  const [todos, setTodos] = React.useState(defaultTodos);
+  //cantidad de TODOs completados
+  const completedTodos = todos.filter((todo) => todo.completed).length;
+  // cantidad total de TODOs
+  const totalTodos = todos.length;
+
   return (
     // todo lo que vamos a mostrar en nuestra aplicacion
     <React.Fragment>
-      <TodoCounter /> {/* // cuantos TODOs completados y creados */}
+      {/* Pasamos el estado a nuestro componente: cuantos TODOs completados y creados */}
+      <TodoCounter total={totalTodos} completed={completedTodos} />
       <TodoSearch />
       {/* // contenedor de TODOs */}
       <TodoList>
