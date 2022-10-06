@@ -1,9 +1,9 @@
 import React from "react";
-import { CreateTodoButton } from "./CreateTodoButton";
-import { TodoCounter } from "./TodoCounter";
-import { TodoItem } from "./TodoItem";
-import { TodoList } from "./TodoList";
-import { TodoSearch } from "./TodoSearch";
+import { CreateTodoButton } from "../CreateTodoButton";
+import { TodoCounter } from "../TodoCounter";
+import { TodoItem } from "../TodoItem";
+import { TodoList } from "../TodoList";
+import { TodoSearch } from "../TodoSearch";
 // import './App.css';
 
 // lista falsa de TODOs

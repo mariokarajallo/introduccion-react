@@ -9,6 +9,7 @@ function TodoItem(props) {
     <li className="TodoItem">
       <span
         className={`Icon Icon-check ${props.completed && "Icon-check--active"}`}
+        // recibimos como parametro desde app
         onClick={props.onComplete}
       >
         ✔
@@ -16,7 +17,11 @@ function TodoItem(props) {
       <p className={`TodoItem-p ${props.completed && "TodoItem-p--complete"}`}>
         {props.text}
       </p>
-      <span className={`Icon Icon-delete`} onClick={props.onDelete}>
+      <span
+        className={`Icon Icon-delete`}
+        // recibimos como parametro desde app
+        onClick={props.onDelete}
+      >
         X
       </span>
     </li>
