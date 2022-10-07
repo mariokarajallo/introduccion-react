@@ -1,19 +1,34 @@
 import React from "react";
 import { AppUI } from "./AppUI";
 
-// lista falsa de TODOs
-const defaultTodos = [
-  { text: "cortar cebolla", completed: true },
-  { text: "tomar el curso", completed: false },
-  { text: "hacer ejercicios", completed: false },
-  { text: "hacer tesis", completed: true },
-];
+// lista falsa de TODOs sin local storage
+// const defaultTodos = [
+//   { text: "cortar cebolla", completed: true },
+//   { text: "tomar el curso", completed: false },
+//   { text: "hacer ejercicios", completed: false },
+//   { text: "hacer tesis", completed: true },
+// ];
 function App() {
+  // Traemos nuestros TODOs almacenados
+  const localStorageTodos = localStorage.getItem("TODOS_V1");
+  let parsedTodos;
+
+  //verificamos
+  if (!localStorageTodos) {
+    //si el usuario es nuevo no existe un item en el localStorage, por lo tanto guardamos uno con un array vacio
+    localStorage.setItem("TODOS_V1", JSON.stringify([]));
+    parsedTodos = [];
+  } else {
+    // si existen TODOs en el local storage los regresamos como nuestros TODOs
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
+  //guardamos nuestros TODOs del localStorage en nuestro estado
+  //estado inicial de nuestros TODOS
+  const [todos, setTodos] = React.useState(parsedTodos);
   //estado de nuesta busqueda
   const [searchValue, setSearchValue] = React.useState("");
 
-  //estado inicial de nuestros TODOS
-  const [todos, setTodos] = React.useState(defaultTodos);
   //cantidad de TODOs completados
   const completedTodos = todos.filter((todo) => todo.completed).length;
   // cantidad total de TODOs
@@ -22,7 +37,7 @@ function App() {
   //creamos una variable donde guardarmeos las coincidencias con la busqueda
   let searchedTodos = [];
 
-  //logica para filtrar
+  //!logica para filtrar
   if (!searchValue.length >= 1) {
     // guardamos nuestros todos a la variable coincidencias
     searchedTodos = todos;
@@ -39,7 +54,17 @@ function App() {
     });
   }
 
-  //completar todo
+  //! Creamos la función en la que actualizaremos nuestro localStorage
+  const saveTodos = (newTodos) => {
+    //convertimos a string nuestros TODOs
+    const stringfiedTodos = JSON.stringify(newTodos);
+    //los guardamos en el localStorage
+    localStorage.setItem("TODOS_V1", stringfiedTodos);
+    //actualizamos nuestro estado
+    setTodos(newTodos);
+  };
+
+  //!completar todo
   const completeTodo = (text) => {
     //filtramos si el texto que recibimos es igual a el texto de un elemento del array
     // para obtener el valor de la posicion del elemento
@@ -49,10 +74,11 @@ function App() {
     //a nuestro nuevo array a todos los elementos que cumplan con el mismo texto que recibamos, le cambiamos a true el valor de la propiedad completed
     newTodos[todoIndex].completed = true;
     //actualizamos nuestro estado mandando el nuevo array de todos
-    setTodos(newTodos);
+    // Cada que el usuario interactúe con nuestra aplicación se guardarán los TODOs con nuestra nueva función
+    saveTodos(newTodos);
   };
 
-  //eliminar todo
+  //!eliminar todo
   // recibe un texto
   const deleteTodo = (text) => {
     //filtramos si el texto que recibimos es igual a el texto de un elemento del array TODO
@@ -64,7 +90,8 @@ function App() {
     //.splice(donde inicia el corte, cuantos elementos desde el inicio del corte)
     newTodos.splice(todoIndex, 1);
     //actualizamos nuestro estado mandando el nuevo array de todos
-    setTodos(newTodos);
+    // Cada que el usuario interactúe con nuestra aplicación se guardarán los TODOs con nuestra nueva función
+    saveTodos(newTodos);
   };
 
   return (

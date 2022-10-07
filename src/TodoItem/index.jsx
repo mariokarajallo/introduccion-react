@@ -1,9 +1,9 @@
 import React from "react";
 import "./TodoItem.css";
 function TodoItem(props) {
-  const onDelete = () => {
-    alert("Ya eliminaste el TODO " + props.text);
-  };
+  // const onDelete = () => {
+  //   alert("Ya eliminaste el TODO " + props.text);
+  // };
 
   return (
     <li className="TodoItem">
