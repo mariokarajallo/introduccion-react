@@ -8,24 +8,46 @@ import { AppUI } from "./AppUI";
 //   { text: "hacer ejercicios", completed: false },
 //   { text: "hacer tesis", completed: true },
 // ];
-function App() {
-  // Traemos nuestros TODOs almacenados
-  const localStorageTodos = localStorage.getItem("TODOS_V1");
-  let parsedTodos;
 
-  //verificamos
-  if (!localStorageTodos) {
+//! Custom Hook -> useLocalStorage
+// Recibimos como parámetros el nombre y el estado inicial de nuestro item.
+function useLocalStorage(itemName, initialValue) {
+  // guardamos nuestro item en una constante y traemos nuestros datos almacenados
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+
+  //logica para verificar si el localStorage contiene datos
+  if (!localStorageItem) {
     //si el usuario es nuevo no existe un item en el localStorage, por lo tanto guardamos uno con un array vacio
-    localStorage.setItem("TODOS_V1", JSON.stringify([]));
-    parsedTodos = [];
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = initialValue;
   } else {
-    // si existen TODOs en el local storage los regresamos como nuestros TODOs
-    parsedTodos = JSON.parse(localStorageTodos);
+    // si existen items en el local storage los traemos y convertimos a su valor original
+    parsedItem = JSON.parse(localStorageItem);
   }
 
-  //guardamos nuestros TODOs del localStorage en nuestro estado
-  //estado inicial de nuestros TODOS
-  const [todos, setTodos] = React.useState(parsedTodos);
+  //podemos utilizar otros hooks
+  // creamos un estado item y pasamos el elemento que consumimos del local storage ya convertido
+  const [item, setItem] = React.useState(parsedItem);
+
+  //! Creamos la función para guardar item en el localStorage
+  // saveItem=saveTodos
+  const saveItem = (newItem) => {
+    //convertimos a string nuestros Items
+    const stringfiedItem = JSON.stringify(newItem);
+    //los guardamos en el localStorage
+    localStorage.setItem(itemName, stringfiedItem);
+    //actualizamos nuestro estado
+    setItem(newItem);
+  };
+
+  //retornamos los datos que necesitamos
+  return [item, saveItem];
+}
+
+function App() {
+  // Desestructuramos los datos que retornamos de nuestro custom hook, y le pasamos los argumentos que necesitamos (nombre y estado inicial)
+  const [todos, saveTodos] = useLocalStorage("TODOS_V1", []);
   //estado de nuesta busqueda
   const [searchValue, setSearchValue] = React.useState("");
 
@@ -53,16 +75,6 @@ function App() {
       return todoText.includes(searchText);
     });
   }
-
-  //! Creamos la función en la que actualizaremos nuestro localStorage
-  const saveTodos = (newTodos) => {
-    //convertimos a string nuestros TODOs
-    const stringfiedTodos = JSON.stringify(newTodos);
-    //los guardamos en el localStorage
-    localStorage.setItem("TODOS_V1", stringfiedTodos);
-    //actualizamos nuestro estado
-    setTodos(newTodos);
-  };
 
   //!completar todo
   const completeTodo = (text) => {
