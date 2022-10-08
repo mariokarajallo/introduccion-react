@@ -6,6 +6,7 @@ import { TodoList } from "../TodoList";
 import { TodoSearch } from "../TodoSearch";
 
 function AppUI({
+  // Desescructuramos las props
   totalTodos,
   completedTodos,
   searchValue,
@@ -13,6 +14,8 @@ function AppUI({
   searchedTodos,
   completeTodo,
   deleteTodo,
+  loading,
+  error,
 }) {
   return (
     // todo lo que vamos a mostrar en nuestra aplicacion
@@ -22,6 +25,13 @@ function AppUI({
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
       {/* // contenedor de TODOs */}
       <TodoList>
+        {/* Mostramos un mensaje en caso de que ocurra algún error */}
+        {error && <p>Desesperate hay un error...</p>}
+        {/* Mostramos un mensaje de cargando, cuando la aplicación está cargando los datos*/}
+        {loading && <p>Estamos cargando, no desesperes... </p>}
+        {/* Si terminó de cargar y no existen TODOs, se muestra un mensaje para crear el primer TODO */}
+        {!loading && !searchedTodos.length && <p> Crea tu primer TODO!</p>}
+
         {/* enviar cada uno de los TODO que necesitamos */}
         {/* iteramos los elementos del array searchedTodos que coinciden con nuestra busqueda */}
         {searchedTodos.map((todo) => (
