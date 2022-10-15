@@ -5,6 +5,7 @@ import { TodoItem } from "../TodoItem";
 import { TodoList } from "../TodoList";
 import { TodoSearch } from "../TodoSearch";
 import { TodoContext } from "../TodoContext";
+import { Modal } from "../Modal";
 
 function AppUI() {
   // Desesctructuramos los valores de nuestro contexto
@@ -46,6 +47,10 @@ function AppUI() {
       </TodoList>
       {/*)}
        </TodoContext.Consumer> */}
+      <Modal>
+        <p>{searchedTodos[0]?.text}</p>
+      </Modal>
+
       <CreateTodoButton />
       {/* boton que abre el modal para crear nuevos TODO */}
     </React.Fragment>
