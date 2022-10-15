@@ -9,8 +9,15 @@ import { Modal } from "../Modal";
 
 function AppUI() {
   // Desesctructuramos los valores de nuestro contexto
-  const { error, loading, completeTodo, deleteTodo, searchedTodos } =
-    React.useContext(TodoContext);
+  const {
+    error,
+    loading,
+    completeTodo,
+    deleteTodo,
+    searchedTodos,
+    openModal,
+    setOpenModal,
+  } = React.useContext(TodoContext);
 
   return (
     // todo lo que vamos a mostrar en nuestra aplicacion
@@ -47,12 +54,16 @@ function AppUI() {
       </TodoList>
       {/*)}
        </TodoContext.Consumer> */}
-      <Modal>
-        <p>{searchedTodos[0]?.text}</p>
-      </Modal>
+      {/* preguntamos si open modal es true */}
+      {!!openModal && (
+        <Modal>
+          {/* preguntamos si existe un elemento del array de TODO antes de imprimir su propiedad texto */}
+          <p>{searchedTodos[0]?.text}</p>
+        </Modal>
+      )}
 
-      <CreateTodoButton />
       {/* boton que abre el modal para crear nuevos TODO */}
+      <CreateTodoButton setOpenModal={setOpenModal} />
     </React.Fragment>
   );
 }
