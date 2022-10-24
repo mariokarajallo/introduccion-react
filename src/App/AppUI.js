@@ -7,6 +7,9 @@ import { TodoSearch } from "../TodoSearch";
 import { TodoContext } from "../TodoContext";
 import { Modal } from "../Modal";
 import { TodoForm } from "../TodoForm";
+import { TodosError } from "../TodosError";
+import { TodosLoading } from "../TodosLoading";
+import { EmptyTodos } from "../EmptyTodos";
 
 function AppUI() {
   // Desesctructuramos los valores de nuestro contexto
@@ -34,11 +37,11 @@ function AppUI() {
         {() => (*/}
       <TodoList>
         {/* Mostramos un mensaje en caso de que ocurra algún error */}
-        {error && <p>Desesperate hay un error...</p>}
+        {error && <TodosError error={error} />}
         {/* Mostramos un mensaje de cargando, cuando la aplicación está cargando los datos*/}
-        {loading && <p>Estamos cargando, no desesperes... </p>}
+        {loading && <TodosLoading />}
         {/* Si terminó de cargar y no existen TODOs, se muestra un mensaje para crear el primer TODO */}
-        {!loading && !searchedTodos.length && <p> Crea tu primer TODO!</p>}
+        {!loading && !searchedTodos.length && <EmptyTodos />}
 
         {/* enviar cada uno de los TODO que necesitamos */}
         {/* iteramos los elementos del array searchedTodos que coinciden con nuestra busqueda */}
