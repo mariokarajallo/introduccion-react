@@ -34,14 +34,23 @@ function TodoProvider(props) {
     //filtramos
     searchedTodos = todos.filter((todo) => {
       //pasamos todos los elementos del array TODO a minuscula
-      const todoText = todo.text.toLocaleLowerCase();
+      const todoText = todo.text.toLowerCase();
       //pasamos todos los palabras cargardas en el input a minuscula
-      const searchText = searchValue.toLocaleLowerCase();
+      const searchText = searchValue.toLowerCase();
 
       //devolvemos los elementos que coincidan
       return todoText.includes(searchText);
     });
   }
+  //! Función para añadir un nuevo TODO
+  const addTodo = (text) => {
+    const newTodos = [...todos];
+    newTodos.push({
+      completed: false,
+      text,
+    });
+    saveTodos(newTodos);
+  };
 
   //!completar todo
   const completeTodo = (text) => {
@@ -90,6 +99,7 @@ function TodoProvider(props) {
         error,
         openModal,
         setOpenModal,
+        addTodo,
       }}
     >
       {props.children}

@@ -6,6 +6,7 @@ import { TodoList } from "../TodoList";
 import { TodoSearch } from "../TodoSearch";
 import { TodoContext } from "../TodoContext";
 import { Modal } from "../Modal";
+import { TodoForm } from "../TodoForm";
 
 function AppUI() {
   // Desesctructuramos los valores de nuestro contexto
@@ -58,7 +59,8 @@ function AppUI() {
       {!!openModal && (
         <Modal>
           {/* preguntamos si existe un elemento del array de TODO antes de imprimir su propiedad texto */}
-          <p>{searchedTodos[0]?.text}</p>
+          {/* <p>{searchedTodos[0]?.text}</p> */}
+          <TodoForm />
         </Modal>
       )}
 
