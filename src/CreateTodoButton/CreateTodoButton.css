@@ -18,6 +18,8 @@
   
     transform: rotate(0);
     transition: .3s ease;
+    /* permite que aparezca encima de todo */
+    z-index: 1;
   }
   
   .CreateTodoButton:hover {
