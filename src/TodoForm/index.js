@@ -39,7 +39,7 @@ function TodoForm() {
       <label>Escribe tu nuevo TODO</label>
       <textarea
         value={newTodoValue}
-        onChange={onchange}
+        onChange={onChange}
         placeholder="agrega tu nuevo TODO..."
       ></textarea>
       <div className="TodoForm-buttonContainer">
