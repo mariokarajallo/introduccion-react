@@ -11,14 +11,14 @@ const iconTypes = {
     <DeleteSVG className="Icon-svg Icon-svg--delete" fill={color} />
   ),
 };
-function TodoIcon(type, color = "gray", onClick) {
+function TodoIcon({ type, color = "gray", onClick }) {
   return (
     <span
       className={`Icon-container Icon-container--${type}`}
       onClick={onClick}
     >
       {/* aqui deberia ir el icono formato SVG */}
-      {iconTypes[type]}
+      {iconTypes[type](color)}
     </span>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
-import { TodoIcon } from "./";
+import { TodoIcon } from "./Index";
 
-function completeIcon({ completed, onComplete }) {
+function CompleteIcon({ completed, onComplete }) {
   return (
     <TodoIcon
       type="check"
@@ -11,4 +11,4 @@ function completeIcon({ completed, onComplete }) {
   );
 }
 
-export { completeIcon };
+export { CompleteIcon };
